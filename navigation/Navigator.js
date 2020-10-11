@@ -4,10 +4,12 @@ import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import PatientsListScreen from '../screens/PatientsListScreen';
+import PatientDetailScreen from '../screens/PatientDetailScreen'
 import Colors from '../constants/Colors';
 
 const Navigator = createStackNavigator({
-    PatientsList : PatientsListScreen
+    PatientsList : PatientsListScreen,
+    PatientDetail : PatientDetailScreen
 }, {
     defaultNavigationOptions: {
         headerStyle: {
