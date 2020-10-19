@@ -10,7 +10,7 @@ import {
     Platform
   } from 'react-native';
 
-  import Colors from '../constants/Colors';
+
 
 const PatientListItem = props => {
     let TouchableCmp = TouchableOpacity;

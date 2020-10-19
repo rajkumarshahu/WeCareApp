@@ -1,41 +1,74 @@
 import React from 'react';
-import { FlatList, Platform, Button } from 'react-native';
+import { FlatList, Button, Platform, Alert } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useSelector } from 'react-redux';
 
 import HeaderButton from '../components/HeaderButton';
 import PatientListItem from '../components/PatientListItem';
 import Colors from '../constants/Colors';
+import * as patientsActions from '../store/actions/patient';
 
 const PatientsListScreen = (props) => {
-	const patients = useSelector((state) => state.patients.clients);
+	const clients = useSelector(
+		(state) => state.patients.clients
+	);
+	const dispatch = useDispatch();
 
 	const selectItemHandler = (id, title) => {
 		props.navigation.navigate('PatientDetail', {
 			patientId: id,
 			patientTitle: title,
 		});
+    };
+
+    const editPatientHandler = id => {
+        props.navigation.navigate('EditPatient', { patientId: id });
+      };
+
+
+	const deleteHandler = (id) => {
+		Alert.alert('Are you sure?', 'Do you really want to delete this patient?', [
+			{ text: 'No', style: 'default' },
+			{
+				text: 'Yes',
+				style: 'destructive',
+				onPress: () => {
+					dispatch(patientsActions.deletePatient(id));
+				},
+			},
+		]);
 	};
 	return (
 		<FlatList
-			data={patients}
+			data={clients}
 			keyExtractor={(item) => item.id}
 			renderItem={(itemData) => (
 				<PatientListItem
 					image={itemData.item.imageUrl}
 					title={itemData.item.title}
 					age={itemData.item.age}
+					// onViewDetail={() => { // This will take to the PatientDetail Screen and forwards patients data (with the second object argument)
+					//     props.navigation.navigate('PatientDetail',{ patientId: itemData.item.id, patientTitle: itemData.item.title} )
+					// }}
 					onSelect={() => {
 						selectItemHandler(itemData.item.id, itemData.item.title);
 					}}
 				>
 					<Button
 						color={Colors.primary}
-						title="View Details"
+						title='View Details'
 						onPress={() => {
-						selectItemHandler(itemData.item.id, itemData.item.title);
-            		}}
-          			/>
+							selectItemHandler(itemData.item.id, itemData.item.title);
+						}}
+					/>
+					<Button color={Colors.primary} title='Edit' onPress={() => {
+                        editPatientHandler(itemData.item.id)
+                    }} />
+					<Button
+						color={Colors.primary}
+						title='Delete'
+						onPress={deleteHandler.bind(this, itemData.item.id)}
+					/>
 				</PatientListItem>
 			)}
 		/>
@@ -44,7 +77,7 @@ const PatientsListScreen = (props) => {
 
 PatientsListScreen.navigationOptions = (navData) => {
 	return {
-		headerTitle: 'Patients',
+		headerTitle: 'Your Patients',
 		headerLeft: () => (
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
 				<Item
@@ -52,6 +85,17 @@ PatientsListScreen.navigationOptions = (navData) => {
 					iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
 					onPress={() => {
 						navData.navigation.toggleDrawer();
+					}}
+				/>
+			</HeaderButtons>
+		),
+		headerRight: () => (
+			<HeaderButtons HeaderButtonComponent={HeaderButton}>
+				<Item
+					title='Add'
+					iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+					onPress={() => {
+						navData.navigation.navigate('EditPatient');
 					}}
 				/>
 			</HeaderButtons>

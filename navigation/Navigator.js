@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 import PatientsListScreen from '../screens/PatientsListScreen';
 import PatientDetailScreen from '../screens/PatientDetailScreen';
-import AddPatientScreen from '../screens/AddPatientScreen';
+import DashboardScreen from '../screens/DashboardScreen';
 import EditPatientScreen from '../screens/EditPatientScreen';
 import Colors from '../constants/Colors';
 import CriticalPatientScreen from '../screens/CriticalPatientScreen';
@@ -21,20 +21,28 @@ const defaultNavOptions = {
 }
 
 // Screens mapped to identifiers
-const Navigator = createStackNavigator({
+const PatientsNavigator = createStackNavigator({
     PatientsList : PatientsListScreen,
     PatientDetail : PatientDetailScreen
-}, {
-    defaultNavigationOptions: defaultNavOptions
-});
-
-const AddPatientNavigator = createStackNavigator({
-    AddPatient: AddPatientScreen
 }, {
     navigationOptions: {
         drawerIcon: drawerConfig => (
         <Ionicons
-            name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+            name={Platform.OS === 'android' ? 'md-people' : 'ios-people'}
+            size={23}
+            color={drawerConfig.tintColor}
+            />
+        )
+    }
+});
+
+const DashBoardNavigator = createStackNavigator({
+    AddPatient: DashboardScreen
+}, {
+    navigationOptions: {
+        drawerIcon: drawerConfig => (
+        <Ionicons
+            name={Platform.OS === 'android' ? 'md-home' : 'ios-home'}
             size={23}
             color={drawerConfig.tintColor}
             />
@@ -53,7 +61,7 @@ const AdminNavigator = createStackNavigator({
     navigationOptions: {
         drawerIcon: drawerConfig => (
         <Ionicons
-            name={Platform.OS === 'android' ? 'md-alert-triangle' : 'ios-alert'}
+            name={Platform.OS === 'android' ? 'md-alert' : 'ios-alert'}
             size={23}
             color={drawerConfig.tintColor}
             />
@@ -66,8 +74,8 @@ const AdminNavigator = createStackNavigator({
 });
 
 const AddEditNavigator = createDrawerNavigator({
-    Home : Navigator,
-    AddPatient: AddPatientNavigator,
+    DashBoard: DashBoardNavigator,
+    Patients : PatientsNavigator,
     CriticalPatient: AdminNavigator
 }, {
     contentOptions: {
