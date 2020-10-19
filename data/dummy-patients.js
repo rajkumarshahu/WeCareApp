@@ -1,50 +1,55 @@
+var faker = require('faker');
 import Patient from '../models/patient';
-
 const PATIENTS = [
     new Patient(
         'p1',
         'cp1',
-        'John Doe',
-        'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+        `${faker.name.findName()}`,
+        `${faker.image.avatar()}`,
         'Heart Patient',
         49,
-        'High heart rate Needs attention'
+        'High heart rate Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        false
     ),
     new Patient(
         'p2',
         'cp1',
-        'Jane Doe',
-        'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+        `${faker.name.findName()}`,
+        `${faker.image.avatar()}`,
         'High BP',
         60,
-        'High BP Needs attention'
+        'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        true
     ),
     new Patient(
         'p3',
         'cp1',
-        'Jane Smith',
-        'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+        `${faker.name.findName()}`,
+        `${faker.image.avatar()}`,
         'High BP',
         67,
-        'High BP Needs attention'
+        'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        false
     ),
     new Patient(
         'p4',
         'cp1',
-        'Adam Smith',
-        'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+        `${faker.name.findName()}`,
+        `${faker.image.avatar()}`,
         'Aortic Aneurysm',
         79,
-        'High BP Needs attention'
+        'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        false
     ),
     new Patient(
         'p5',
         'cp1',
-        'Jackie Nolan',
-        'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+        `${faker.name.findName()}`,
+        `${faker.image.avatar()}`,
         'Arthritis',
         79,
-        'Joint Pain'
+        'Joint Pain. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        true
     ),
 ];
 

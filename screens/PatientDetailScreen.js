@@ -7,13 +7,14 @@ import {
   Button,
   StyleSheet
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; // Use this to select single patient
 
 import Colors from '../constants/Colors';
 
 const PatientDetailScreen = props => {
   const patientId = props.navigation.getParam('patientId');
   const selectedPatient = useSelector(state =>
+    // Find a single patient
     state.patients.clients.find(patient => patient.id === patientId)
   );
 
@@ -23,12 +24,14 @@ const PatientDetailScreen = props => {
       <View style={styles.actions}>
         <Button color={Colors.primary} title="Add Detail" onPress={() => {}} />
       </View>
-      <Text style={styles.price}>Age: {selectedPatient.age}</Text>
+      <Text style={styles.age}>Age: {selectedPatient.age}</Text>
       <Text style={styles.description}>{selectedPatient.diagnosis}</Text>
+      <Text style={styles.description}>{selectedPatient.description}</Text>
     </ScrollView>
   );
 };
 
+// Get header title
 PatientDetailScreen.navigationOptions = navData => {
   return {
     headerTitle: navData.navigation.getParam('patientTitle')
@@ -38,13 +41,13 @@ PatientDetailScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
   image: {
     width: '100%',
-    height: 300
+    height: 200
   },
   actions: {
     marginVertical: 10,
     alignItems: 'center'
   },
-  price: {
+  age: {
     fontSize: 20,
     color: '#888',
     textAlign: 'center',
