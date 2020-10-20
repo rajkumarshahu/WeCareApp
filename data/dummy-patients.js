@@ -9,6 +9,12 @@ const PATIENTS = [
         'Heart Patient',
         49,
         'High heart rate Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        '36.5',
+        '69',
+        '20',
+        '129',
+        '98',
+        '95',
         false
     ),
     new Patient(
@@ -19,6 +25,12 @@ const PATIENTS = [
         'High BP',
         60,
         'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        '37.5',
+        '79',
+        '16',
+        '144',
+        '100',
+        '88',
         true
     ),
     new Patient(
@@ -29,6 +41,12 @@ const PATIENTS = [
         'High BP',
         67,
         'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        '37',
+        '89',
+        '20',
+        '122',
+        '80',
+        '90',
         false
     ),
     new Patient(
@@ -39,6 +57,12 @@ const PATIENTS = [
         'Aortic Aneurysm',
         79,
         'High BP Needs attention. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        '36.5',
+        '69',
+        '20',
+        '129',
+        '98',
+        '95',
         false
     ),
     new Patient(
@@ -47,8 +71,14 @@ const PATIENTS = [
         `${faker.name.findName()}`,
         `${faker.image.avatar()}`,
         'Arthritis',
-        79,
+        '79',
         'Joint Pain. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        '39.5',
+        '90',
+        '20',
+        '140',
+        '98',
+        '89',
         true
     ),
 ];

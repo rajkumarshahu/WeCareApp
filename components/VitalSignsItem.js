@@ -3,14 +3,10 @@ import {
     View,
     Text,
     StyleSheet,
-
   } from 'react-native';
 
-
-const Card = props => {
-
+const VitalSignsItems = props => {
   return (
-
     <View style={styles.summary}>
         <Text>{props.children}</Text>
     </View>
@@ -37,4 +33,5 @@ const styles = StyleSheet.create({
   });
 
 
-export default Card;
+
+export default VitalSignsItems;

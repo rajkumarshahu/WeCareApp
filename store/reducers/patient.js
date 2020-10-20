@@ -30,6 +30,13 @@ export default (state = initialState, action) => {
               action.patientData.imageUrl,
               action.patientData.description,
               action.patientData.age,
+              action.patientData.description,
+              action.patientData.bodyTemperature,
+              action.patientData.pulseRate,
+              action.patientData.respirationRate,
+              action.patientData.systolicBP,
+              action.patientData.diastolicBP,
+              action.patientData.o2sat
           );
           return {
               ...state,
@@ -47,7 +54,14 @@ export default (state = initialState, action) => {
         action.patientData.title,
         action.patientData.imageUrl,
         action.patientData.description,
-        state.criticalPatients[patientIndex].age
+        state.criticalPatients[patientIndex].age,
+        action.patientData.description,
+        action.patientData.bodyTemperature,
+        action.patientData.pulseRate,
+        action.patientData.respirationRate,
+        action.patientData.systolicBP,
+        action.patientData.diastolicBP,
+        action.patientData.o2sat
       );
       const updatedCriticalPatients = [...state.criticalPatients];
       updatedCriticalPatients[patientIndex] = updatedPatient;

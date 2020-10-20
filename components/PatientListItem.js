@@ -15,11 +15,11 @@ import {
 const PatientListItem = props => {
     let TouchableCmp = TouchableOpacity;
 
-  if (Platform.OS === 'android' && Platform.Version >= 21) {
-    TouchableCmp = TouchableNativeFeedback;
-  }
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+      TouchableCmp = TouchableNativeFeedback;
+    }
 
-  return (
+    return (
 
     <View style={styles.patient}>
       <View style={styles.touchable}>

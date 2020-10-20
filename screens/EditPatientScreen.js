@@ -24,23 +24,30 @@ const EditPatientScreen = props => {
   const [imageUrl, setImageUrl] = useState(
     editedPatient ? editedPatient.imageUrl : ''
   );
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(editedPatient ? editedPatient.age : '');
   const [description, setDescription] = useState(
     editedPatient ? editedPatient.description : ''
   );
+  const [bodyTemperature, setBodyTemperature] = useState(editedPatient ? editedPatient.bodyTemperature : '');
+  const [pulseRate, setPulseRate] = useState(editedPatient ? editedPatient.pulseRate : '');
+  const [respirationRate, setRespirationRate] = useState(editedPatient ? editedPatient.respirationRate : '');
+  const [systolicBP, setSystolicBP] = useState(editedPatient ? editedPatient.systolicBP : '');
+  const [diastolicBP, setDiastolicBP] = useState(editedPatient ? editedPatient.diastolicBP : '');
+  const [o2sat, setO2sat] = useState(editedPatient ? editedPatient.o2sat : '');
+
 
   const submitHandler = useCallback(() => {
     if (editedPatient) {
       dispatch(
-        patientsActions.updatePatient(patId, title, description, imageUrl)
+        patientsActions.updatePatient(patId, title, description, imageUrl, description,bodyTemperature, pulseRate, respirationRate, systolicBP, diastolicBP, o2sat)
       );
     } else {
       dispatch(
-        patientsActions.createPatient(title, description, imageUrl, age)
+        patientsActions.createPatient(title, description, imageUrl, age, description,bodyTemperature, pulseRate, respirationRate, systolicBP, diastolicBP, o2sat)
       );
     }
     props.navigation.goBack();
-  }, [dispatch, patId, title, description, imageUrl, age]);
+  }, [dispatch, patId, title, description, imageUrl, age, description, bodyTemperature, pulseRate, respirationRate, systolicBP, diastolicBP, o2sat ]);
 
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });
@@ -81,6 +88,54 @@ const EditPatientScreen = props => {
             style={styles.input}
             value={description}
             onChangeText={text => setDescription(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Body Temperature</Text>
+          <TextInput
+            style={styles.input}
+            value={bodyTemperature}
+            onChangeText={text => setBodyTemperature(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Pulse Rate</Text>
+          <TextInput
+            style={styles.input}
+            value={pulseRate}
+            onChangeText={text => setPulseRate(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Respiration Rate</Text>
+          <TextInput
+            style={styles.input}
+            value={respirationRate}
+            onChangeText={text => setRespirationRate(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Systolic BP</Text>
+          <TextInput
+            style={styles.input}
+            value={systolicBP}
+            onChangeText={text => setSystolicBP(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Diastolic BP</Text>
+          <TextInput
+            style={styles.input}
+            value={diastolicBP}
+            onChangeText={text => setDiastolicBP(text)}
+          />
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>Oxygen Saturation</Text>
+          <TextInput
+            style={styles.input}
+            value={o2sat}
+            onChangeText={text => setO2sat(text)}
           />
         </View>
       </View>

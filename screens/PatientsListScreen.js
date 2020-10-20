@@ -93,7 +93,8 @@ PatientsListScreen.navigationOptions = (navData) => {
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
 				<Item
 					title='Add'
-					iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+					iconName={Platform.OS === 'android' ? 'md-add-circle-outline' : 'ios-add-circle-outline'}
+					color={Colors.primary}
 					onPress={() => {
 						navData.navigation.navigate('EditPatient');
 					}}

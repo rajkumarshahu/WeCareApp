@@ -37,12 +37,31 @@ const PatientsNavigator = createStackNavigator({
 });
 
 const DashBoardNavigator = createStackNavigator({
-    AddPatient: DashboardScreen
+    Dashboard: DashboardScreen
 }, {
     navigationOptions: {
         drawerIcon: drawerConfig => (
         <Ionicons
             name={Platform.OS === 'android' ? 'md-home' : 'ios-home'}
+            size={23}
+            color={drawerConfig.tintColor}
+            />
+        )
+    }
+},
+
+{
+    defaultNavigationOptions: defaultNavOptions
+});
+
+const AdminNavigator2 = createStackNavigator({
+    PatientsList : PatientsListScreen,
+    EditPatient: EditPatientScreen
+}, {
+    navigationOptions: {
+        drawerIcon: drawerConfig => (
+        <Ionicons
+            name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
             size={23}
             color={drawerConfig.tintColor}
             />
@@ -76,7 +95,8 @@ const AdminNavigator = createStackNavigator({
 const AddEditNavigator = createDrawerNavigator({
     DashBoard: DashBoardNavigator,
     Patients : PatientsNavigator,
-    CriticalPatient: AdminNavigator
+    CriticalPatient: AdminNavigator,
+    EditPatient: AdminNavigator2
 }, {
     contentOptions: {
         activeTintColor: Colors.primary
