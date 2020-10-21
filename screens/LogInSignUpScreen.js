@@ -2,17 +2,17 @@ import React, { useState, useReducer, useCallback, useEffect } from 'react';
 import {
 	ScrollView,
 	View,
-	TextInput,
-	Text,
+	Alert,
 	KeyboardAvoidingView,
 	StyleSheet,
 	Button,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+
+import { TextInput } from 'react-native-paper'
+
 import { useDispatch } from 'react-redux';
 
-import Input from '../components/Input';
-import Card from '../components/Card';
+
 import Colors from '../constants/Colors';
 import * as logInSignUpAction from '../store/actions/logInSignUp';
 
@@ -40,9 +40,10 @@ const formReducer = (state, action) => {
 	return state;
 };
 
+
 const LogInSignUpScreen = (props) => {
   const [ isSignUp, setIsSignUp] = useState(false)
-
+  const [error, setError] = useState();
 	const dispatch = useDispatch();
 
 	const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -57,7 +58,14 @@ const LogInSignUpScreen = (props) => {
 		formIsValid: false,
 	});
 
-	const loginSignupHandler = () => {
+	useEffect(() => {
+		if (error) {
+		  Alert.alert('An Error Occurred!', error, [{ text: 'Ok' }]);
+		}
+	  }, [error]);
+
+
+	const loginSignupHandler = async () => {
     let action;
     if(isSignUp){
       action =
@@ -71,8 +79,14 @@ const LogInSignUpScreen = (props) => {
         formState.inputValues.email,
         formState.inputValues.password
       )
-    }
-    dispatch(action)
+	}
+	setError(null)
+	try {
+		await dispatch(action);
+		props.navigation.navigate('AddEdit');
+	} catch (err) {
+		setError(err.message);
+	}
 
 	};
 
@@ -90,18 +104,12 @@ const LogInSignUpScreen = (props) => {
 
 	return (
 		<KeyboardAvoidingView
-			behavior='padding'
 			keyboardVerticalOffset={50}
-			style={styles.screen}
 		>
 			<ScrollView>
-      <View tyle={styles.authContainer}>
-
-
-				<View style={styles.formControl}>
-					<Text style={styles.label}>Email</Text>
+      <View style={styles.container}>
+				<View>
 					<TextInput
-						style={styles.input}
 						id='email'
 						label='E-Mail'
 						keyboardType='email-address'
@@ -115,14 +123,10 @@ const LogInSignUpScreen = (props) => {
 						returnKeyType='next'
 						initialValue=''
 					/>
-					{!formState.inputValidities.title && (
-						<Text>Please enter a valid email!</Text>
-					)}
+
 				</View>
 				<View style={styles.formControl}>
-					<Text style={styles.label}>Password</Text>
 					<TextInput
-						style={{ height: 20, width: 100 }}
 						id='password'
 						label='Password'
 						keyboardType='default'
@@ -134,9 +138,7 @@ const LogInSignUpScreen = (props) => {
 						onChangeText={inputChangeHandler.bind(this, 'password')}
 						initialValue=''
 					/>
-					{!formState.inputValidities.title && (
-						<Text>Please enter a valid password!</Text>
-					)}
+
 				</View>
 				<View style={styles.buttonContainer}>
 					<Button
@@ -159,36 +161,21 @@ const LogInSignUpScreen = (props) => {
 };
 
 LogInSignUpScreen.navigationOptions = {
-	headerTitle: 'Authenticate',
+	headerTitle: 'Login/Sign Up',
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-	},
-	authContainer: {
-		width: '80%',
+	container: {
+		width: '100%',
 		maxWidth: 400,
-		maxHeight: 400,
-		padding: 20,
+		maxHeight: 500,
+		padding: 30,
 	},
 	buttonContainer: {
 		marginTop: 10,
 	},
 	form: {
 		margin: 20,
-	},
-	formControl: {
-		width: '100%',
-	},
-	label: {
-		marginVertical: 8,
-	},
-	input: {
-		paddingHorizontal: 2,
-		paddingVertical: 5,
-		borderBottomColor: '#ccc',
-		borderBottomWidth: 1,
 	},
 });
 

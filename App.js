@@ -4,10 +4,12 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
 import patientsReducer from './store/reducers/patient';
+// import logInSignUpReducer from './store/reducers/logInSignUp';
 import Navigator from './navigation/Navigator';
 
 const rootReducer = combineReducers({
-  patients: patientsReducer
+  patients: patientsReducer,
+  //logInSignUp: logInSignUpReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Button, Platform, Alert } from 'react-native';
+import { FlatList, Button, Platform, Alert, View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -38,6 +38,13 @@ const CriticalPatientScreen = (props) => {
 			},
 		]);
 	};
+
+	if (criticalPatients.length === 0) {
+		return <View>
+			<Text>There are no patients in critical condition.</Text>
+		</View>
+	}
+
 	return (
 		<FlatList
 			data={criticalPatients}

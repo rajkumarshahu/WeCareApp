@@ -1,12 +1,14 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { Platform } from 'react-native';
+import { Platform, View, SafeAreaView, Button } from 'react-native';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems, DrawerNavigatorItems } from 'react-navigation-drawer';
 import { Ionicons } from '@expo/vector-icons'
+import { useDispatch } from 'react-redux';
 
+import * as logInSignUpActions from '../store/actions/logInSignUp';
 import PatientsListScreen from '../screens/PatientsListScreen';
 import PatientDetailScreen from '../screens/PatientDetailScreen';
 import DashboardScreen from '../screens/DashboardScreen';
@@ -132,6 +134,18 @@ const AddEditNavigator = createDrawerNavigator({
 }, {
     contentOptions: {
         activeTintColor: Colors.primary
+    },
+    contentComponent: props => {
+        const dispatch = useDispatch()
+        return <View style={{flex:1, paddingTop: 20}}>
+            <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
+                <DrawerNavigatorItems {...props} />
+                <Button title="Logout" color={Colors.primary} onPress={() => {
+                    dispatch(logInSignUpActions.logout());
+                    props.navigation.navigate('LogInSignUp')
+                }} />
+            </SafeAreaView>
+        </View>
     }
 });
 
