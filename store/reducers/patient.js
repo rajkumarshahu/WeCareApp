@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
         action.patientData.title,
         action.patientData.imageUrl,
         action.patientData.description,
-        state.criticalPatients[patientIndex].age,
+        state.patientData.age,
         action.patientData.description,
         action.patientData.bodyTemperature,
         action.patientData.pulseRate,

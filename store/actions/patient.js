@@ -24,7 +24,7 @@ export const createPatient = (title, description, imageUrl, age, bodyTemperature
   };
 };
 
-export const updatePatient = (id, title, description, imageUrl, bodyTemperature, pulseRate, respirationRate, systolicBP, diastolicBP, o2sat) => {
+export const updatePatient = (id, title, description, imageUrl, age, bodyTemperature, pulseRate, respirationRate, systolicBP, diastolicBP, o2sat) => {
   return {
     type: UPDATE_PATIENT,
     pid: id,
@@ -32,6 +32,7 @@ export const updatePatient = (id, title, description, imageUrl, bodyTemperature,
       title,
       description,
       imageUrl,
+      age,
       bodyTemperature,
       pulseRate,
       respirationRate,
