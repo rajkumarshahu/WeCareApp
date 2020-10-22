@@ -4,27 +4,17 @@ import {
     Text,
     Image,
     StyleSheet,
-    Button,
     TouchableOpacity,
-    TouchableNativeFeedback,
-    Platform
   } from 'react-native';
 
-
-
+import { Card } from 'react-native-paper';
 const PatientListItem = props => {
-    let TouchableCmp = TouchableOpacity;
-
-    if (Platform.OS === 'android' && Platform.Version >= 21) {
-      TouchableCmp = TouchableNativeFeedback;
-    }
 
     return (
 
     <View style={styles.patient}>
-      <View style={styles.touchable}>
-        <TouchableCmp onPress={props.onSelect} useForeground>
-          <View>
+        <TouchableOpacity onPress={props.onSelect} useForeground>
+          <Card>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{ uri: props.image }} />
             </View>
@@ -35,9 +25,8 @@ const PatientListItem = props => {
             <View style={styles.actions}>
               {props.children}
             </View>
-          </View>
-        </TouchableCmp>
-      </View>
+          </Card>
+        </TouchableOpacity>
     </View>
   );
 
@@ -54,10 +43,6 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       height: 300,
       margin: 20
-    },
-    touchable: {
-      borderRadius: 10,
-      overflow: 'hidden'
     },
     imageContainer: {
       width: '100%',

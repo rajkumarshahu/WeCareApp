@@ -8,14 +8,10 @@ import {
 	Button,
 } from 'react-native';
 
-import { TextInput } from 'react-native-paper'
-
+import { TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-
-
 import Colors from '../constants/Colors';
 import * as logInSignUpAction from '../store/actions/logInSignUp';
-
 
 const formReducer = (state, action) => {
 	if (action.type === 'FORM_INPUT_UPDATE') {
@@ -40,12 +36,10 @@ const formReducer = (state, action) => {
 	return state;
 };
 
-
 const LogInSignUpScreen = (props) => {
-  const [ isSignUp, setIsSignUp] = useState(false)
-  const [error, setError] = useState();
+	const [isSignUp, setIsSignUp] = useState(false);
+	const [error, setError] = useState();
 	const dispatch = useDispatch();
-
 	const [formState, dispatchFormState] = useReducer(formReducer, {
 		inputValues: {
 			email: '',
@@ -60,34 +54,30 @@ const LogInSignUpScreen = (props) => {
 
 	useEffect(() => {
 		if (error) {
-		  Alert.alert('An Error Occurred!', error, [{ text: 'Ok' }]);
+			Alert.alert('An Error Occurred!', error, [{ text: 'Ok' }]);
 		}
-	  }, [error]);
-
+	}, [error]);
 
 	const loginSignupHandler = async () => {
-    let action;
-    if(isSignUp){
-      action =
-        logInSignUpAction.signup(
-          formState.inputValues.email,
-          formState.inputValues.password
-      );
-    } else {
-      action =
-      logInSignUpAction.login(
-        formState.inputValues.email,
-        formState.inputValues.password
-      )
-	}
-	setError(null)
-	try {
-		await dispatch(action);
-		props.navigation.navigate('AddEdit');
-	} catch (err) {
-		setError(err.message);
-	}
-
+		let action;
+		if (isSignUp) {
+			action = logInSignUpAction.signup(
+				formState.inputValues.email,
+				formState.inputValues.password
+			);
+		} else {
+			action = logInSignUpAction.login(
+				formState.inputValues.email,
+				formState.inputValues.password
+			);
+		}
+		setError(null);
+		try {
+			await dispatch(action);
+			props.navigation.navigate('AddEdit');
+		} catch (err) {
+			setError(err.message);
+		}
 	};
 
 	const inputChangeHandler = useCallback(
@@ -103,58 +93,56 @@ const LogInSignUpScreen = (props) => {
 	);
 
 	return (
-		<KeyboardAvoidingView
-			keyboardVerticalOffset={50}
-		>
+		<KeyboardAvoidingView keyboardVerticalOffset={50}>
 			<ScrollView>
-      <View style={styles.container}>
-				<View>
-					<TextInput
-						id='email'
-						label='E-Mail'
-						keyboardType='email-address'
-						required
-						email
-						autoCapitalize='none'
-						errorText='Please enter a valid email address.'
-						value={formState.inputValues.email}
-						onChangeText={inputChangeHandler.bind(this, 'email')}
-						autoCorrect
-						returnKeyType='next'
-						initialValue=''
-					/>
-
+				<View style={styles.container}>
+					<View>
+						<TextInput
+							id='email'
+							label='E-Mail'
+							keyboardType='email-address'
+							required
+							email
+							autoCapitalize='none'
+							errorText='Please enter a valid email address.'
+							value={formState.inputValues.email}
+							onChangeText={inputChangeHandler.bind(this, 'email')}
+							autoCorrect
+							returnKeyType='next'
+							initialValue=''
+						/>
+					</View>
+					<View style={styles.formControl}>
+						<TextInput
+							id='password'
+							label='Password'
+							keyboardType='default'
+							secureTextEntry
+							required
+							minLength={5}
+							autoCapitalize='none'
+							errorText='Please enter a valid password.'
+							onChangeText={inputChangeHandler.bind(this, 'password')}
+							initialValue=''
+						/>
+					</View>
+					<View style={styles.buttonContainer}>
+						<Button
+							title={isSignUp ? 'Sign Up' : 'Login'}
+							color={Colors.primary}
+							onPress={loginSignupHandler}
+						/>
+					</View>
+					<View style={styles.buttonContainer}>
+						<Button
+							title={isSignUp ? 'Switch to Login' : 'Switch to Sign Up'}
+							color={Colors.accent}
+							onPress={() => {
+								setIsSignUp((prevState) => !prevState);
+							}}
+						/>
+					</View>
 				</View>
-				<View style={styles.formControl}>
-					<TextInput
-						id='password'
-						label='Password'
-						keyboardType='default'
-						secureTextEntry
-						required
-						minLength={5}
-						autoCapitalize='none'
-						errorText='Please enter a valid password.'
-						onChangeText={inputChangeHandler.bind(this, 'password')}
-						initialValue=''
-					/>
-
-				</View>
-				<View style={styles.buttonContainer}>
-					<Button
-						title={isSignUp ? 'Sign Up' : 'Login'}
-						color={Colors.primary}
-						onPress={loginSignupHandler}
-					/>
-				</View>
-				<View style={styles.buttonContainer}>
-					<Button
-						title={isSignUp ? 'Switch to Login' : 'Switch to Sign Up'}
-						color={Colors.accent}
-						onPress={() => {setIsSignUp(prevState => !prevState)}}
-					/>
-				</View>
-        </View>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	);

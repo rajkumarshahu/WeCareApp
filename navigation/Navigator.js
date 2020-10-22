@@ -21,7 +21,7 @@ const defaultNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
     },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+    headerTintColor: Platform.OS === 'android' ? Colors.title : Colors.primary
 }
 
 // Screens mapped to identifiers
@@ -125,6 +125,8 @@ const AdminNavigator = createStackNavigator({
 {
     defaultNavigationOptions: defaultNavOptions
 });
+
+
 
 const AddEditNavigator = createDrawerNavigator({
     DashBoard: DashBoardNavigator,

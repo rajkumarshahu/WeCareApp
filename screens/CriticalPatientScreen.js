@@ -19,12 +19,11 @@ const CriticalPatientScreen = (props) => {
 			patientId: id,
 			patientTitle: title,
 		});
-    };
+	};
 
-    const editPatientHandler = id => {
-        props.navigation.navigate('EditPatient', { patientId: id });
-      };
-
+	const editPatientHandler = (id) => {
+		props.navigation.navigate('EditPatient', { patientId: id });
+	};
 
 	const deleteHandler = (id) => {
 		Alert.alert('Are you sure?', 'Do you really want to delete this patient?', [
@@ -40,9 +39,11 @@ const CriticalPatientScreen = (props) => {
 	};
 
 	if (criticalPatients.length === 0) {
-		return <View>
-			<Text>There are no patients in critical condition.</Text>
-		</View>
+		return (
+			<View>
+				<Text>There are no patients in critical condition.</Text>
+			</View>
+		);
 	}
 
 	return (
@@ -54,9 +55,6 @@ const CriticalPatientScreen = (props) => {
 					image={itemData.item.imageUrl}
 					title={itemData.item.title}
 					age={itemData.item.age}
-					// onViewDetail={() => { // This will take to the PatientDetail Screen and forwards patients data (with the second object argument)
-					//     props.navigation.navigate('PatientDetail',{ patientId: itemData.item.id, patientTitle: itemData.item.title} )
-					// }}
 					onSelect={() => {
 						selectItemHandler(itemData.item.id, itemData.item.title);
 					}}
@@ -68,9 +66,13 @@ const CriticalPatientScreen = (props) => {
 							selectItemHandler(itemData.item.id, itemData.item.title);
 						}}
 					/>
-					<Button color={Colors.primary} title='Edit' onPress={() => {
-                        editPatientHandler(itemData.item.id)
-                    }} />
+					<Button
+						color={Colors.primary}
+						title='Edit'
+						onPress={() => {
+							editPatientHandler(itemData.item.id);
+						}}
+					/>
 					<Button
 						color={Colors.primary}
 						title='Delete'
@@ -100,7 +102,11 @@ CriticalPatientScreen.navigationOptions = (navData) => {
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
 				<Item
 					title='Add'
-					iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+					iconName={
+						Platform.OS === 'android'
+							? 'md-add-circle-outline'
+							: 'ios-add-circle-outline'
+					}
 					onPress={() => {
 						navData.navigation.navigate('EditPatient');
 					}}

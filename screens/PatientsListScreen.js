@@ -47,9 +47,6 @@ const PatientsListScreen = (props) => {
 					image={itemData.item.imageUrl}
 					title={itemData.item.title}
 					age={itemData.item.age}
-					// onViewDetail={() => { // This will take to the PatientDetail Screen and forwards patients data (with the second object argument)
-					//     props.navigation.navigate('PatientDetail',{ patientId: itemData.item.id, patientTitle: itemData.item.title} )
-					// }}
 					onSelect={() => {
 						selectItemHandler(itemData.item.id, itemData.item.title);
 					}}

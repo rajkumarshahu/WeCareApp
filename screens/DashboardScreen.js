@@ -5,14 +5,13 @@ import {
 	StyleSheet,
 	Text,
 	Platform,
-	Button,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { IconButton } from 'react-native-paper';
 
 import HeaderButton from '../components/HeaderButton';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import Colors from '../constants/Colors';
 
 const DashboardScreen = (props) => {
@@ -27,7 +26,7 @@ const DashboardScreen = (props) => {
 		});
 	};
 	return (
-		<View>
+		<View style={styles.screen}>
 			<View style={styles.container}>
 				<Card>
 					<View style={styles.container}>
@@ -44,39 +43,40 @@ const DashboardScreen = (props) => {
 					</View>
 				</Card>
 			</View>
+			<View>
+				<FlatList
+					data={criticalPatients}
+					keyExtractor={(item) => item.id}
+					renderItem={(itemData) => (
+						<View style={styles.container}>
+							<Card>
+								<View style={styles.patientContainer}>
+									<IconButton
+										icon='alert'
+										color='red'
+										size={30}
+										onPress={() => {
+											selectItemHandler(itemData.item.id, itemData.item.title);
+										}}
+									/>
 
-			<FlatList
-				data={criticalPatients}
-				keyExtractor={(item) => item.id}
-				renderItem={(itemData) => (
-					<View style={styles.container}>
-						<Card>
-							<View style={styles.patientContainer}>
-								<IconButton
-									icon='alert'
-									color='red'
-									size={30}
-									onPress={() => {
-										selectItemHandler(itemData.item.id, itemData.item.title);
-									}}
-								/>
+									<Text style={styles.patientText}>{itemData.item.title}</Text>
 
-								<Text style={styles.patientText}>{itemData.item.title}</Text>
-
-								<IconButton
-									style={styles.button}
-									icon='eye'
-									color={Colors.primary}
-									size={40}
-									onPress={() => {
-										selectItemHandler(itemData.item.id, itemData.item.title);
-									}}
-								/>
-							</View>
-						</Card>
-					</View>
-				)}
-			/>
+									<IconButton
+										style={styles.button}
+										icon='eye'
+										color={Colors.primary}
+										size={40}
+										onPress={() => {
+											selectItemHandler(itemData.item.id, itemData.item.title);
+										}}
+									/>
+								</View>
+							</Card>
+						</View>
+					)}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -99,15 +99,16 @@ DashboardScreen.navigationOptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
+	screen: {
+		backgroundColor: '#DAEDED',
+	},
 	container: {
 		padding: 10,
 		margin: 10,
-		backgroundColor: '#ebebeb'
+		backgroundColor: '#FAFFFF',
 	},
 	patientContainer: {
-		flex: 1,
 		flexDirection: 'row',
-		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#f1f6f9',
 		margin: 10,
